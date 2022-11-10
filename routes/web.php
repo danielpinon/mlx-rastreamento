@@ -20,9 +20,24 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['prefix'=>'admin','middleware' => 'auth', 'namespace' => 'Admin'], function () {
+	// Página Inicial
+	Route::get('/home', 'HomeController@index')->name('home');
+	
+	// Gerenciador de Facções
+	Route::group(['prefix'=>'faccoes'], function () {
+		Route::get('/','FaccoesController@index')->name('admin.faccoes.index');
+		Route::get('{id}/editar', 'FaccoesController@edit')->name('admin.faccoes.edit');
+		Route::get('{id}/delete', 'FaccoesController@delete')->name('admin.faccoes.delete');
+		Route::post('create', 'FaccoesController@create')->name('admin.faccoes.create');
+		Route::post('{id}/update', 'FaccoesController@update')->name('admin.faccoes.update');
+		Route::group(['prefix'=>'{token}'], function () {
+			Route::get('/','FaccoesController@info')->name('admin.faccoes.info');
+		});		
+	});
+	// Gerenciador de Setores
+	// Gerenciador de Lote de Trabalho
 	Route::get('table-list', function () {
 		return view('pages.table_list');
 	})->name('table');

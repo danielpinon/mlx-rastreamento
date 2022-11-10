@@ -69,11 +69,11 @@
                     {{ __('Entrar') }}
                   </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                   <a href="{{ route('register') }}" class="nav-link">
                     {{ __('Cadastre-se') }}
                   </a>
-                </li>
+                </li> --}}
               </ul>
             </div>
             <div class="bmd-form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
@@ -128,11 +128,11 @@
                 </a>
             @endif
         </div>
-        <div class="col-6 text-right">
+        {{-- <div class="col-6 text-right">
             <a href="{{ route('register') }}" class="text-light">
                 <small>{{ __('Criar nova Conta') }}</small>
             </a>
-        </div>
+        </div> --}}
       </div>
     </div>
   </div>

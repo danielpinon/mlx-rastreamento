@@ -57,8 +57,8 @@ class FaccoesController extends Controller
         if ($faccao == null) {
             return redirect()->back()->with('falha','Erro ao buscar facção!');
         }
-
-        dd($faccao);
+        // dd($faccao);
+        return view('pages.faccoes.info', compact('faccao'));
         
     }
 

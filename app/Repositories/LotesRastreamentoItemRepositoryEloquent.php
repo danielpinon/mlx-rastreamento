@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\lotes_rastreamento_itemRepository;
+use App\Repositories\LotesRastreamentoItemRepository;
 use App\Models\LotesRastreamentoItem;
 use App\Validators\LotesRastreamentoItemValidator;
 

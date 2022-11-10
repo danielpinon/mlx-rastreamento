@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'faccoes', 'titlePage' => __('Gerenciador de Facções')])
+@extends('layouts.app', ['activePage' => 'lotes', 'titlePage' => __('Gerenciador de Lotes de Trabalho')])
 
 @push('css')
     <style>
@@ -15,53 +15,56 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title ">Facções do Sistema</h4>
-            <p class="card-category">Lista de Facções do Sistema</p>
+            <h4 class="card-title ">Lotes de Trabalho do Sistema</h4>
+            <p class="card-category">Lista de Lotes de Trabalho do Sistema</p>
           </div>
           <div class="card-body">
             <div class="row">
                 <div class="col-12 text-right">
-                    <button data-toggle="modal" data-target="#addFaccao" class="btn btn-sm btn-primary" type="button">Adicionar Facção</button>
+                    <button data-toggle="modal" data-target="#addLotesDeTrabalho" class="btn btn-sm btn-primary" type="button">Adicionar Lotes de Trabalho</button>
                 </div>
             </div>
             <div class="">
               <table class="table">
                 <thead class=" text-primary">
                   <th>#</th>
-                  <th>Nome</th>
+                  <th>Facção</th>
+                  <th>Descrição</th>
                   <th>Status</th>
-                  <th>Qnt. Lotes</th>
+                  <th>Concluídos</th>
                   <th>Pendentes</th>
                   <th>Opções</th>
                 </thead>
                 <tbody>
-                  @if ($faccoes == "[]")
+                  @if ($lotes == "[]")
                     <tr>
-                      <td>Sem Fações</td>
-                      <td>Sem Fações</td>
-                      <td>Sem Fações</td>
-                      <td>Sem Fações</td>
-                      <td>Sem Fações</td>
-                      <td>Sem Fações</td>
+                      <td>Sem Lotes</td>
+                      <td>Sem Lotes</td>
+                      <td>Sem Lotes</td>
+                      <td>Sem Lotes</td>
+                      <td>Sem Lotes</td>
+                      <td>Sem Lotes</td>
+                      <td>Sem Lotes</td>
                     </tr>
                   @else
-                    @foreach ($faccoes as $faccao)
+                    @foreach ($lotes as $lote)
                       <tr>
-                        <td>{{ $faccao->id }}</td>
-                        <td>{{ $faccao->FAC_NAME }}</td>
+                        <td>{{ $lote->id }}</td>
+                        <td>{{ $lote->faccao->FAC_NAME }}</td>
+                        <td>{{ $lote->LOTE_DESC_SMALL }}</td>
                         <td>
-                          @if ($faccao->FAC_STATUS)
+                          @if ($lote->LOTE_STATUS)
                             <div class="alert alert-success text-center" role="alert">
-                              Ativo
+                              Finalizado
                             </div>
                           @else
-                            <div class="alert alert-danger text-center" role="alert">
-                              Desativado
+                            <div class="alert alert-warning text-center" role="alert">
+                              Criado / Em Produção
                             </div>
                           @endif
                         </td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td>{{ $lote->itens->count() }}</td>
+                        <td>{{ $lote->itens->count() }}</td>
                         <td>
                           <button class="btn btn-primary dropdown-toggle p-2" type="button"
                               id="acoes" data-toggle="dropdown" aria-haspopup="true"
@@ -70,8 +73,8 @@
                           </button>
                           <div class="dropdown-menu" aria-labelledby="acoes">
                               <a class="dropdown-item"
-                                  href="{{ route('admin.faccoes.info',$faccao->FAC_TOKEN) }}">
-                                  Abrir Facção
+                                  href="{{ route('admin.lotes.itens',$lote->LOTE_TOKEN) }}">
+                                  Ver Itens
                               </a>
                               <div class="dropdown-divider"></div>
                               <a class="dropdown-item" href="#"
@@ -97,40 +100,52 @@
   </div>
 </div>
 <!-- Modal Adicionar Fação -->
-<div class="modal fade" id="addFaccao" tabindex="-1" role="dialog" aria-labelledby="addFaccaoLabel" aria-hidden="true">
+<div class="modal fade" id="addLotesDeTrabalho" tabindex="-1" role="dialog" aria-labelledby="addLotesDeTrabalhoLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addFaccaoLabel">Adicionar Facção</h5>
+        <h5 class="modal-title" id="addLotesDeTrabalhoLabel">Adicionar Lote</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="{{ route('admin.faccoes.create') }}" method="post">
+      <form action="{{ route('admin.lotes.create') }}" method="post">
         @csrf
         <div class="modal-body">
           <div class="row">
             <div class="col-12">
               <div class="form-group">
-                <label>Nome da Facção</label>
-                <input type="text" class="form-control" name="FAC_NAME" placeholder="Digite o nome da facção">
+                <label>Selecione uma facção</label>
+                <select class="form-control" data-style="btn btn-link" name="FAC_ID" required>
+                  @foreach ($faccoes as $faccao)
+                      <option value="{{$faccao->id}}">{{$faccao->FAC_NAME}}</option>
+                  @endforeach
+                </select>
               </div>
             </div>
             <div class="col-12">
-              <label>Status da Facção</label>
-              <div class="togglebutton">
-                <label>
-                  <input type="checkbox" checked="" name="FAC_STATUS">
-                    <span class="toggle"></span>
-                    Ativo
-                </label>
+              <div class="form-group">
+                <label>Descrição Resumida do Lote</label>
+                <input type="text" class="form-control" name="LOTE_DESC_SMALL" placeholder="Digite do lote" required>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label>Descrição Completa do Lote</label>
+                <textarea class="form-control" rows="3" name="LOTE_BIG_DESC"></textarea>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group ml-auto">
+                <label for="inputZip">Quantidade de Itens</label>
+                <input type="number" class="form-control" id="inputZip" min="1" max="1000" name="LOTE_QNT_ITENS" required>
               </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-          <button type="submit" class="btn btn-primary">Criar Facção</button>
+          <button type="submit" class="btn btn-primary">Criar Lote</button>
         </div>
       </form>
     </div>

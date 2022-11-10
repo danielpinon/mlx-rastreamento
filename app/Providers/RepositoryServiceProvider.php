@@ -26,6 +26,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\App\Repositories\FaccoesRepository::class, \App\Repositories\FaccoesRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\FaccoesUsersRepository::class, \App\Repositories\FaccoesUsersRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\SetoresRepository::class, \App\Repositories\SetoresRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\LotesRastreamentoRepository::class, \App\Repositories\LotesRastreamentoRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\LotesRastreamentoItemRepository::class, \App\Repositories\LotesRastreamentoItemRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\LotesRastreamentoItemSetorRepository::class, \App\Repositories\LotesRastreamentoItemSetorRepositoryEloquent::class);
         //:end-bindings:
     }
 }

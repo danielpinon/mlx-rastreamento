@@ -45,15 +45,15 @@
             <p>{{ __('Ger. de Facções') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'typography' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('typography') }}">
+      <li class="nav-item{{ $activePage == 'setores' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.setores.index') }}">
           <i class="material-icons">library_books</i>
             <p>{{ __('Ger. de Setores') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'icons' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('icons') }}">
-          <i class="material-icons">bubble_chart</i>
+      <li class="nav-item{{ $activePage == 'lotes' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.lotes.index') }}">
+          <i class="material-icons">work_history</i>
           <p>{{ __('Ger. de Lote de Trabalho') }}</p>
         </a>
       </li>

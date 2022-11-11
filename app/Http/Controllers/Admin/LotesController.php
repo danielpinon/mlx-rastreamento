@@ -58,4 +58,12 @@ class LotesController extends Controller
         }
         return redirect()->back()->with('sucesso','Lote Gerado com Sucesso!');
     }
+
+    public function itens($token)
+    {
+        $lote = $this->lotesRastreamentoRepository->findWhere([
+            "LOTE_TOKEN" => $token
+        ])->first();
+        return view('pages.lotes.info', compact('lote'));
+    }
 }

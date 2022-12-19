@@ -26,7 +26,7 @@
               <div class="card-icon">
                 <i class="material-icons">description</i>
               </div>
-              <p class="card-category">Processos</p>
+              <p class="card-category">Lotes de Trabalhos</p>
               <h3 class="card-title">0</h3>
             </div>
             <div class="card-footer">
@@ -42,7 +42,7 @@
               <div class="card-icon">
                 <i class="material-icons">history_edu</i>
               </div>
-              <p class="card-category">Contratos</p>
+              <p class="card-category">Lotes Pendentes</p>
               <h3 class="card-title">0</h3>
             </div>
             <div class="card-footer">
@@ -58,7 +58,7 @@
               <div class="card-icon">
                 <i class="material-icons">work</i>
               </div>
-              <p class="card-category">Fornecedores</p>
+              <p class="card-category">Facções</p>
               <h3 class="card-title">0</h3>
             </div>
             <div class="card-footer">
@@ -78,7 +78,7 @@
             </div>
             <div class="card-body table-responsive">
               <table class="table table-hover">
-                <thead class="text-danger">
+                <thead class="">
                   <th>Origem</th>
                   <th>Conteúdo</th>
                   <th>Status</th>
@@ -86,27 +86,9 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="text-danger">Teste</td>
-                    <td class="text-danger">Teste</td>
-                    <td class="text-danger">Teste</td>
-                    <td class="text-right">
-                          <button class="btn btn-primary btn-sm">Abrir Alerta</button>
-                          <button class="btn btn-primary btn-sm">Marcar como Resolvido</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-danger">Teste</td>
-                    <td class="text-danger">Teste</td>
-                    <td class="text-danger">Teste</td>
-                    <td class="text-right">
-                          <button class="btn btn-primary btn-sm">Abrir Alerta</button>
-                          <button class="btn btn-primary btn-sm">Marcar como Resolvido</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-danger">Teste</td>
-                    <td class="text-danger">Teste</td>
-                    <td class="text-danger">Teste</td>
+                    <td class="">Teste</td>
+                    <td class="">Teste</td>
+                    <td class="">Teste</td>
                     <td class="text-right">
                           <button class="btn btn-primary btn-sm">Abrir Alerta</button>
                           <button class="btn btn-primary btn-sm">Marcar como Resolvido</button>

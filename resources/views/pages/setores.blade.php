@@ -63,10 +63,10 @@
                               Ações
                           </button>
                           <div class="dropdown-menu" aria-labelledby="acoes">
-                              <a class="dropdown-item" href="#"
+                              {{-- <a class="dropdown-item" href="#"
                                   onclick="return false;">
                                   Bloquear
-                              </a>
+                              </a> --}}
                               <a class="dropdown-item" href="#"
                                   onclick="return false;">
                                   Apagar

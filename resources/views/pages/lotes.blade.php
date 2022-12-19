@@ -77,10 +77,10 @@
                                   Ver Itens
                               </a>
                               <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#"
+                              {{-- <a class="dropdown-item" href="#"
                                   onclick="return false;">
                                   Bloquear
-                              </a>
+                              </a> --}}
                               <a class="dropdown-item" href="#"
                                   onclick="return false;">
                                   Apagar

@@ -26,7 +26,7 @@
               <div class="card-icon">
                 <i class="material-icons">description</i>
               </div>
-              <p class="card-category">Lotes de Trabalhos</p>
+              <p class="card-category">Total de Lotes</p>
               <h3 class="card-title">0</h3>
             </div>
             <div class="card-footer">

@@ -49,15 +49,12 @@ class FaccoesController extends Controller
     /**
      * Info the application faccoes
      */
-    public function info($hash)
+    public function info($token)
     {
-        $faccao = $this->faccoesRepository->findWhere([
-            "FAC_TOKEN" => $hash
-        ])->first();
+        $faccao = $this->faccoesRepository->findToken($token);
         if ($faccao == null) {
             return redirect()->back()->with('falha','Erro ao buscar facção!');
         }
-        // dd($faccao);
         return view('pages.faccoes.info', compact('faccao'));
         
     }

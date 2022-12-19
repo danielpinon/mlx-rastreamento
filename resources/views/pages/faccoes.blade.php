@@ -60,8 +60,8 @@
                             </div>
                           @endif
                         </td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td>{{ $faccao->lotes->count() }}</td>
+                        <td>{{ $faccao->lotes->where('LOTE_STATUS',true)->count() }}</td>
                         <td>
                           <button class="btn btn-primary dropdown-toggle p-2" type="button"
                               id="acoes" data-toggle="dropdown" aria-haspopup="true"

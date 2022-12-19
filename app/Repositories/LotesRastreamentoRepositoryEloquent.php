@@ -35,4 +35,8 @@ class LotesRastreamentoRepositoryEloquent extends BaseRepository implements Lote
         $this->pushCriteria(app(RequestCriteria::class));
     }
     
+    public function findToken($token)
+    {
+        return LotesRastreamento::where('LOTE_TOKEN',$token)->first();
+    }
 }

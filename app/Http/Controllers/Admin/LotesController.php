@@ -61,9 +61,7 @@ class LotesController extends Controller
 
     public function itens($token)
     {
-        $lote = $this->lotesRastreamentoRepository->findWhere([
-            "LOTE_TOKEN" => $token
-        ])->first();
+        $lote = $this->lotesRastreamentoRepository->findToken($token);
         return view('pages.lotes.info', compact('lote'));
     }
 }

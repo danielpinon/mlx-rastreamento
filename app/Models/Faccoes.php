@@ -26,4 +26,13 @@ class Faccoes extends Model implements Transformable
         'FAC_STATUS'
     ];
 
+    /**
+     * Get all of the lotes for the Faccoes
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function lotes()
+    {
+        return $this->hasMany(LotesRastreamento::class, 'FAC_ID', 'id');
+    }
 }

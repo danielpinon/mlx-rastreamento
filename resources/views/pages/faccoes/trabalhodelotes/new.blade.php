@@ -77,70 +77,18 @@
                                 </div>
                             </div>
                             <div class="">
-                              <table class="table">
-                                <thead class=" text-primary">
-                                  <th>#</th>
-                                  <th>Descrição</th>
-                                  <th>Status</th>
-                                  <th>Concluídos</th>
-                                  <th>Pendentes</th>
-                                  <th>Opções</th>
-                                </thead>
-                                <tbody>
-                                  @if ($faccao->lotes == "[]")
-                                    <tr>
-                                      <td>Sem Lotes</td>
-                                      <td>Sem Lotes</td>
-                                      <td>Sem Lotes</td>
-                                      <td>Sem Lotes</td>
-                                      <td>Sem Lotes</td>
-                                      <td>Sem Lotes</td>
-                                    </tr>
-                                  @else
-                                    @foreach ($faccao->lotes as $lote)
-                                      <tr>
-                                        <td>{{ $lote->id }}</td>
-                                        <td>{{ $lote->LOTE_DESC_SMALL }}</td>
-                                        <td>
-                                          @if ($lote->LOTE_STATUS)
-                                            <div class="alert alert-success text-center" role="alert">
-                                              Finalizado
-                                            </div>
-                                          @else
-                                            <div class="alert alert-warning text-center" role="alert">
-                                              Criado / Em Produção
-                                            </div>
-                                          @endif
-                                        </td>
-                                        <td>{{ $lote->itens->count() }}</td>
-                                        <td>{{ $lote->itens->count() }}</td>
-                                        <td>
-                                          <button class="btn btn-primary dropdown-toggle p-2" type="button"
-                                              id="acoes" data-toggle="dropdown" aria-haspopup="true"
-                                              aria-expanded="false">
-                                              Ações
-                                          </button>
-                                          <div class="dropdown-menu" aria-labelledby="acoes">
-                                              <a class="dropdown-item"
-                                                  href="{{ route('admin.lotes.itens',$lote->LOTE_TOKEN) }}">
-                                                  Ver Itens
-                                              </a>
-                                              <div class="dropdown-divider"></div>
-                                              <a class="dropdown-item" href="#"
-                                                  onclick="return false;">
-                                                  Bloquear
-                                              </a>
-                                              <a class="dropdown-item" href="#"
-                                                  onclick="return false;">
-                                                  Apagar
-                                              </a>
-                                          </div>
-                                        </td>
-                                      </tr>
-                                    @endforeach
-                                  @endif
-                                </tbody>
-                              </table>
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                        <th>#</th>
+                                        <th>Nome</th>
+                                        <th>Status</th>
+                                        <th>Qnt. Lotes</th>
+                                        <th>Pendentes</th>
+                                        <th>Opções</th>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

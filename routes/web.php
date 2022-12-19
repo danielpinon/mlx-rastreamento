@@ -34,6 +34,9 @@ Route::group(['prefix'=>'admin','middleware' => 'auth', 'namespace' => 'Admin'],
 		Route::post('{id}/update', 'FaccoesController@update')->name('admin.faccoes.update');
 		Route::group(['prefix'=>'{token}'], function () {
 			Route::get('/','FaccoesController@info')->name('admin.faccoes.info');
+			Route::group(['prefix'=>'lotedetrabalho', 'namespace'=>'Faccoes'], function () {
+				Route::get('novo','LoteDeTrabalhoController@new')->name('admin.faccoes.details.lotedetrabalho.new');
+			});		
 		});		
 	});
 	// Gerenciador de Setores

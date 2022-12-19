@@ -35,4 +35,9 @@ class FaccoesRepositoryEloquent extends BaseRepository implements FaccoesReposit
         $this->pushCriteria(app(RequestCriteria::class));
     }
     
+
+    public function findToken($token)
+    {
+        return Faccoes::where('FAC_TOKEN',$token)->first();
+    }
 }

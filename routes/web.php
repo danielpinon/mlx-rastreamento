@@ -34,9 +34,12 @@ Route::group(['prefix'=>'admin','middleware' => 'auth', 'namespace' => 'Admin'],
 		Route::post('{id}/update', 'FaccoesController@update')->name('admin.faccoes.update');
 		Route::group(['prefix'=>'{token}'], function () {
 			Route::get('/','FaccoesController@info')->name('admin.faccoes.info');
-			Route::group(['prefix'=>'lotedetrabalho', 'namespace'=>'Faccoes'], function () {
-				Route::get('novo','LoteDeTrabalhoController@new')->name('admin.faccoes.details.lotedetrabalho.new');
-			});		
+			Route::group(['prefix'=>'usuarios', 'namespace'=>'Faccoes'], function () {
+				Route::get('/', 'UsersController@index')->name('admin.faccoes.details.users');
+				Route::post('create', 'UsersController@create')->name('admin.faccoes.details.users.create');
+				Route::get('{tokenUser}/delete', 'UsersController@delete')->name('admin.faccoes.details.users.delete');
+				Route::post('{tokenUser}/update', 'UsersController@update')->name('admin.faccoes.details.users.update');
+			});
 		});		
 	});
 	// Gerenciador de Setores
@@ -51,6 +54,8 @@ Route::group(['prefix'=>'admin','middleware' => 'auth', 'namespace' => 'Admin'],
 		Route::post('create','LotesController@create')->name('admin.lotes.create');
 		Route::group(['prefix'=>'{token}/itens'], function () {
 			Route::get('/','LotesController@itens')->name('admin.lotes.itens');
+			Route::get('add','LotesController@addItem')->name('admin.lotes.itens.add');
+			Route::get('{id}/delete','LotesController@deleteItem')->name('admin.lotes.itens.delete');
 		});
 	});
 	Route::get('table-list', function () {

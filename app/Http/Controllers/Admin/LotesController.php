@@ -64,4 +64,32 @@ class LotesController extends Controller
         $lote = $this->lotesRastreamentoRepository->findToken($token);
         return view('pages.lotes.info', compact('lote'));
     }
+
+    public function addItem($token)
+    {
+        $lote = $this->lotesRastreamentoRepository->findToken($token);
+        $itens = $lote->itens;
+        $i = explode('I',$itens->sortByDesc('id')->first()->LOTE_ITEM_IDENTIFY)[1] + 1;
+        $this->lotesRastreamentoItemRepository->create([
+            'LOTE_ID' => $lote->id,
+            'LOTE_ITEM_IDENTIFY' => "L".str_pad($lote->id, 10 , '0' , STR_PAD_LEFT)."D".date('Ymd')."I".str_pad($i, 4 , '0' , STR_PAD_LEFT)
+        ]);
+        $lotes = $this->lotesRastreamentoItemRepository->findWhere(['LOTE_ID' => $lote->id]);
+        $lote->update([
+            "LOTE_QNT_ITENS" => $lotes->count()
+        ]);
+        return redirect()->back()->with('sucesso','Item criado no Lote com Sucesso!');
+    }
+
+    public function deleteItem($token, $idItem)
+    {
+        $lote = $this->lotesRastreamentoRepository->findToken($token);
+        $item = $this->lotesRastreamentoItemRepository->find($idItem);
+        $item->delete();
+        $lotes = $this->lotesRastreamentoItemRepository->findWhere(['LOTE_ID' => $lote->id]);
+        $lote->update([
+            "LOTE_QNT_ITENS" => $lotes->count()
+        ]);
+        return redirect()->back()->with('sucesso','Item apagado no Lote com Sucesso!');
+    }
 }

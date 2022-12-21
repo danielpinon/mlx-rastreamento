@@ -86,6 +86,12 @@
                 </thead>
                 <tbody>
                   <tr>
+                    <td>Sem Alertas</td>
+                    <td>Sem Alertas</td>
+                    <td>Sem Alertas</td>
+                    <td class="text-right">Sem Alertas</td>
+                  </tr>
+                  {{-- <tr>
                     <td class="">Teste</td>
                     <td class="">Teste</td>
                     <td class="">Teste</td>
@@ -93,7 +99,7 @@
                           <button class="btn btn-primary btn-sm">Abrir Alerta</button>
                           <button class="btn btn-primary btn-sm">Marcar como Resolvido</button>
                     </td>
-                  </tr>
+                  </tr> --}}
                 </tbody>
               </table>
             </div>

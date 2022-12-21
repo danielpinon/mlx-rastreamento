@@ -19,6 +19,11 @@ Route::group(['namespace'=>'Api'],function () {
     Route::post('register', 'AuthController@signup');
     Route::group(['middleware' => 'auth:sanctum'],function () {
         Route::get('me', 'AuthController@me');
-        Route::get('info', 'AuthController@info');
+        Route::group(['prefix' => 'lotedetrabalho'],function () {
+            Route::get('list', 'loteDeTrabalhoController@list');
+            Route::get('{token}/info', 'loteDeTrabalhoController@info');
+            Route::get('setores/list', 'loteDeTrabalhoController@setoresList');
+            Route::post('{token}/update', 'loteDeTrabalhoController@updateItem');
+        });
     });
 });

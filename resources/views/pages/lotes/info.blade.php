@@ -79,13 +79,13 @@
                                                     <td>{{ $item->id }}</td>
                                                     <td>{{ $item->LOTE_ITEM_IDENTIFY }}</td>
                                                     <td>
-                                                        @if ($lote->LOTE_ITEM_STATUS)
+                                                        @if ($item->LOTE_ITEM_STATUS == $setores->sortByDesc('SETOR_ORDEM')->first()->SETOR_ORDEM)
                                                             <div class="alert alert-success text-center" role="alert">
                                                                 Finalizado
                                                             </div>
                                                         @else
                                                             <div class="alert alert-warning text-center" role="alert">
-                                                                Criado (Aguardando Entrar em Produção)
+                                                                {{ $setores->sortBy('SETOR_ORDEM')->where("SETOR_ORDEM",$item->LOTE_ITEM_STATUS)->first()->SETOR_NAME }}
                                                             </div>
                                                         @endif
                                                     </td>

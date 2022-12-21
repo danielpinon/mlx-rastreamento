@@ -34,5 +34,10 @@ class FaccoesUsersRepositoryEloquent extends BaseRepository implements FaccoesUs
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    public function findUser($id)
+    {
+        return FaccoesUsers::where('USER_ID',$id)->first()->faccoes;
+    }
     
 }

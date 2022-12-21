@@ -35,4 +35,14 @@ class FaccoesUsers extends Model implements Transformable
         return $this->belongsTo(User::class, 'USER_ID', 'id');
     }
 
+    /**
+     * Get the faccoes that owns the FaccoesUsers
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function faccoes()
+    {
+        return $this->belongsTo(Faccoes::class, 'FAC_ID', 'id');
+    }
+
 }

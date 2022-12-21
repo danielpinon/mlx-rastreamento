@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\SetoresRepository;
 use App\Repositories\FaccoesRepository;
 use App\Repositories\LotesRastreamentoRepository;
 use App\Repositories\LotesRastreamentoItemRepository;
@@ -18,11 +19,13 @@ class LotesController extends Controller
      */
     public function __construct(
         FaccoesRepository $faccoesRepository,
+        SetoresRepository $setoresRepository,
         LotesRastreamentoRepository $lotesRastreamentoRepository,
         LotesRastreamentoItemRepository $lotesRastreamentoItemRepository
     )
     {
         $this->middleware('auth');
+        $this->setoresRepository = $setoresRepository;
         $this->faccoesRepository = $faccoesRepository;
         $this->lotesRastreamentoRepository = $lotesRastreamentoRepository;
         $this->lotesRastreamentoItemRepository = $lotesRastreamentoItemRepository;
@@ -62,7 +65,8 @@ class LotesController extends Controller
     public function itens($token)
     {
         $lote = $this->lotesRastreamentoRepository->findToken($token);
-        return view('pages.lotes.info', compact('lote'));
+        $setores = $this->setoresRepository->findWhere(['SETOR_STATUS'=>true]);
+        return view('pages.lotes.info', compact('lote','setores'));
     }
 
     public function addItem($token)

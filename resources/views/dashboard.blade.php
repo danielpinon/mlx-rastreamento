@@ -27,7 +27,7 @@
                 <i class="material-icons">description</i>
               </div>
               <p class="card-category">Total de Lotes</p>
-              <h3 class="card-title">0</h3>
+              <h3 class="card-title">{{ $lotes->count() }}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
@@ -43,7 +43,7 @@
                 <i class="material-icons">history_edu</i>
               </div>
               <p class="card-category">Lotes Pendentes</p>
-              <h3 class="card-title">0</h3>
+              <h3 class="card-title">{{ $lotes->where('LOTE_STATUS',false)->count() }}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
@@ -59,7 +59,7 @@
                 <i class="material-icons">work</i>
               </div>
               <p class="card-category">Facções</p>
-              <h3 class="card-title">0</h3>
+              <h3 class="card-title">{{ $faccoes->count() }}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">

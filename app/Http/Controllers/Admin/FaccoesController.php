@@ -47,6 +47,19 @@ class FaccoesController extends Controller
     }
 
     /**
+     * Apagar Facções
+     */
+    public function delete($token)
+    {
+        $faccao = $this->faccoesRepository->findToken($token);
+        if ($faccao == null) {
+            return redirect()->back()->with('falha','Erro ao buscar facção!');
+        }
+        $faccao->delete();
+        return redirect()->back()->with('sucesso','Facção apagada com sucesso!');
+    }
+
+    /**
      * Info the application faccoes
      */
     public function info($token)

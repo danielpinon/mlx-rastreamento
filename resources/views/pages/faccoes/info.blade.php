@@ -127,11 +127,8 @@
                                                                 Ver Itens
                                                             </a>
                                                             <div class="dropdown-divider"></div>
-                                                            {{-- <a class="dropdown-item" href="#"
-                                                  onclick="return false;">
-                                                  Bloquear
-                                              </a> --}}
-                                                            <a class="dropdown-item" href="#" onclick="return false;">
+                                                            <a class="dropdown-item btn-apagar" href="#"
+                                                                data-token="{{ $lote->LOTE_TOKEN }}">
                                                                 Apagar
                                                             </a>
                                                         </div>
@@ -196,3 +193,32 @@
         </div>
     </div>
 @endsection
+
+
+@push('js')
+    <script>
+        // Apagar Documento
+        (() => {
+            $('.btn-apagar').click((e) => {
+                Swal.fire({
+                    title: 'Deseja realmente apagar o lote?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Apagar',
+                    denyButtonText: 'Não apagar',
+                }).then((result) => {
+                    console.log(result);
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.value) {
+                        window.location.href = (
+                            "{{ route('admin.lotes.apagar', '#') }}"
+                        ).replace('#', $(e.currentTarget).data('token'));
+                    } else {
+                        Swal.fire('Ação cancelada!', '', 'info')
+                    }
+                })
+            });
+        })();
+    </script>
+@endpush

@@ -14,7 +14,8 @@
             font-weight: bold;
         }
         .text{
-            font-size: 1rem;
+            font-size: .6rem;
+            font-weight: bold;
         }
     </style>
   </head>

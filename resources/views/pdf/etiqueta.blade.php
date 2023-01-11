@@ -6,7 +6,7 @@
     <title>Código de Barras</title>
     <style>
         @page {
-            margin: 20px 20px 20px 20px !important;
+            margin: 5px 5px 5px 5px !important;
             padding: 0px 0px 0px 0px !important;
         }
         .description{

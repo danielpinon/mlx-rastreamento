@@ -45,12 +45,14 @@ Route::group(['prefix'=>'admin','middleware' => 'auth', 'namespace' => 'Admin'],
 	// Gerenciador de Setores
 	Route::group(['prefix'=>'setores'], function () {
 		Route::get('/','SetoresController@index')->name('admin.setores.index');
+		Route::get('{id}/apagar','SetoresController@delete')->name('admin.setores.apagar');
 		Route::post('create','SetoresController@create')->name('admin.setores.create');
 		Route::post('reorganiza','SetoresController@reorganiza')->name('admin.setores.reorganiza');
 	});
 	// Gerenciador de Lote de Trabalho
 	Route::group(['prefix'=>'lotes'], function () {
 		Route::get('/','LotesController@index')->name('admin.lotes.index');
+		Route::get('{token}/apagar','LotesController@delete')->name('admin.lotes.apagar');
 		Route::get('{token}/printer','LotesController@printer')->name('admin.lotes.printer');
 		Route::post('create','LotesController@create')->name('admin.lotes.create');
 		Route::group(['prefix'=>'{token}/itens'], function () {

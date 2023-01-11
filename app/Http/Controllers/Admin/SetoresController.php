@@ -32,6 +32,25 @@ class SetoresController extends Controller
         $setores = $this->setoresRepository->all();
         return view('pages.setores', compact('setores'));
     }
+    
+    /**
+     * Apagar Setor
+     */
+    public function delete($id)
+    {
+        $setor = $this->setoresRepository->find($id);
+        $setor->delete();
+        $setores = $this->setoresRepository->all();
+        $order = 1;
+        foreach ($setores->sortBy('SETOR_ORDEM') as $key => $setor) {
+            $setor->update([
+                "SETOR_ORDEM" => $order
+            ]);
+            $order++;
+        }
+
+        return redirect()->back()->with('sucesso','Lote apagado com Sucesso!');
+    }
 
     /**
      * Create the application faccoes
@@ -45,7 +64,7 @@ class SetoresController extends Controller
         $array['SETOR_TOKEN'] = Str::uuid();
         $ultimoSetor = $this->setoresRepository->orderBy('id','desc')->get()->first();
         if ($ultimoSetor == null) {
-            $array['SETOR_ORDEM'] = 0;
+            $array['SETOR_ORDEM'] = 1;
         }else {
             $array['SETOR_ORDEM'] = $ultimoSetor->SETOR_ORDEM + 1;
         }

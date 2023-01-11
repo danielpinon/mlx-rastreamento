@@ -84,6 +84,16 @@ class LotesController extends Controller
         return redirect()->back()->with('sucesso','Lote Gerado com Sucesso!');
     }
 
+    /**
+     * Apagar Lote
+     */
+    public function delete($token)
+    {
+        $lote = $this->lotesRastreamentoRepository->findToken($token);
+        $lote->delete();
+        return redirect()->back()->with('sucesso','Lote apagado com Sucesso!');
+    }
+
     public function itens($token)
     {
         $lote = $this->lotesRastreamentoRepository->findToken($token);

@@ -67,7 +67,8 @@
                                   onclick="return false;">
                                   Bloquear
                               </a> --}}
-                              <a class="dropdown-item" href="#"
+                              <a class="dropdown-item btn-apagar" href="#"
+                                  data-id="{{ $setor->id }}"
                                   onclick="return false;">
                                   Apagar
                               </a>
@@ -161,5 +162,30 @@
               }
           });
       });
+    </script>
+    <script>
+      // Apagar Documento
+      (() => {
+            $('.btn-apagar').click((e) => {
+                Swal.fire({
+                    title: 'Deseja realmente apagar o Setor?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Apagar',
+                    denyButtonText: 'Não apagar',
+                }).then((result) => {
+                    console.log(result);
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.value) {
+                        window.location.href = (
+                            "{{ route('admin.setores.apagar', '#') }}"
+                        ).replace('#', $(e.currentTarget).data('id'));
+                    } else {
+                        Swal.fire('Ação cancelada!', '', 'info')
+                    }
+                })
+            });
+        })();
     </script>
 @endpush

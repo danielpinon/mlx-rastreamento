@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Picqer\Barcode\BarcodeGeneratorPNG;
 use App\Http\Controllers\Controller;
 use App\Repositories\SetoresRepository;
 use App\Repositories\FaccoesRepository;
@@ -42,6 +44,22 @@ class LotesController extends Controller
         $lotes = $this->lotesRastreamentoRepository->all();
         $setores = $this->setoresRepository->findWhere(['SETOR_STATUS'=>true]);
         return view('pages.lotes', compact('lotes','faccoes','setores'));
+    }
+
+    /**
+     * Printer facção
+     */
+    public function printer($token)
+    {
+        $lote = $this->lotesRastreamentoRepository->findToken($token);
+        $generator = new BarcodeGeneratorPNG();
+        // dd();
+        // return view('pdf.etiqueta', compact('lote', 'generator'));
+        $pdf = Pdf::loadView('pdf.etiqueta', compact('lote', 'generator'));
+        $customPaper = array(0,0,255,113);
+        $pdf = $pdf->setPaper($customPaper);
+        return $pdf->stream();
+        return view('pages.lotes.info', compact('lote','setores'));
     }
 
 

@@ -36,7 +36,7 @@
                 <td class="text">Código: {{  $lote->LOTE_IDENTIFY }}</td>
             </tr>
             <tr>
-                <td class="text" colspan="2"><img src="data:image/png;base64,{!! base64_encode($generator->getBarcode($lote->LOTE_IDENTIFY, $generator::TYPE_CODABAR)) !!}" style="width: 100%"></td>
+                <td class="text" colspan="2"><img src="data:image/png;base64,{!! base64_encode($generator->getBarcode($lote->LOTE_IDENTIFY, $generator::TYPE_CODE_11)) !!}" style="width: 100%"></td>
             </tr>
         </tbody>
     </table>

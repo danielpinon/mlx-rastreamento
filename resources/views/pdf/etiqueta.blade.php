@@ -10,7 +10,7 @@
             padding: 0px 0px 0px 0px !important;
         }
         .description{
-            font-size: .6rem;
+            font-size: .5rem;
             font-weight: bold;
         }
         .text{

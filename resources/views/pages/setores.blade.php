@@ -105,11 +105,21 @@
                 <input type="text" class="form-control" name="SETOR_NAME" placeholder="Digite o nome do setor">
               </div>
             </div>
-            <div class="col-12">
+            <div class="col-4">
               <label>Status do Setor</label>
               <div class="togglebutton">
                 <label>
                   <input type="checkbox" checked="" name="SETOR_STATUS">
+                    <span class="toggle"></span>
+                    Ativo
+                </label>
+              </div>
+            </div>
+            <div class="col-4">
+              <label>Exlusiva MLX</label>
+              <div class="togglebutton">
+                <label>
+                  <input type="checkbox" name="SETOR_STATUS_EXCLUSIVE_MLX">
                     <span class="toggle"></span>
                     Ativo
                 </label>

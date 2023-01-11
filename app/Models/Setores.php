@@ -24,7 +24,8 @@ class Setores extends Model implements Transformable
         'SETOR_ORDEM',
         'SETOR_NAME',
         'SETOR_TOKEN',
-        'SETOR_STATUS'
+        'SETOR_STATUS',
+        'SETOR_STATUS_EXCLUSIVE_MLX'
     ];
 
 }

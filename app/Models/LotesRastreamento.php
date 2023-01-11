@@ -25,6 +25,7 @@ class LotesRastreamento extends Model implements Transformable
         'LOTE_DESC_SMALL',
         'LOTE_TOKEN',
         'LOTE_STATUS',
+        'LOTE_IDENTIFY',
         'LOTE_QNT_ITENS',
         'LOTE_BIG_DESC'
     ];

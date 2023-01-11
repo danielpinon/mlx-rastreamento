@@ -40,7 +40,8 @@ class LotesController extends Controller
     {
         $faccoes = $this->faccoesRepository->findWhere(["FAC_STATUS"=>1]);
         $lotes = $this->lotesRastreamentoRepository->all();
-        return view('pages.lotes', compact('lotes','faccoes'));
+        $setores = $this->setoresRepository->findWhere(['SETOR_STATUS'=>true]);
+        return view('pages.lotes', compact('lotes','faccoes','setores'));
     }
 
 
@@ -53,6 +54,9 @@ class LotesController extends Controller
         $array = $request->toArray();
         $array['LOTE_TOKEN'] = Str::uuid();
         $lote = $this->lotesRastreamentoRepository->create($array);
+        $lote->update([
+            'LOTE_IDENTIFY' => "L".str_pad($lote->id, 10 , '0' , STR_PAD_LEFT)."D".date('Ymd')."I".str_pad(0, 4 , '0' , STR_PAD_LEFT)
+        ]);
         for ($i=1; $i <= $request->LOTE_QNT_ITENS; $i++) { 
             $this->lotesRastreamentoItemRepository->create([
                 'LOTE_ID' => $lote->id,

@@ -21,7 +21,11 @@
           <div class="card-body">
             <div class="row">
                 <div class="col-12 text-right">
-                    <button data-toggle="modal" data-target="#addLotesDeTrabalho" class="btn btn-sm btn-primary" type="button">Adicionar Lotes de Trabalho</button>
+                  <a data-toggle="modal" data-target="#addLotesDeTrabalho"
+                      class="btn btn-primary rounded-circle" style="color: white;padding: 1rem;">
+                      <div class="material-icons">add</div>
+                  </a>
+                  {{-- <button  class="btn btn-sm btn-primary" type="button">Adicionar Lotes de Trabalho</button> --}}
                 </div>
             </div>
             <div class="">
@@ -53,14 +57,30 @@
                         <td>{{ $lote->faccao->FAC_NAME }}</td>
                         <td>{{ $lote->LOTE_DESC_SMALL }}</td>
                         <td>
-                          @if ($lote->LOTE_STATUS)
-                            <div class="alert alert-success text-center" role="alert">
-                              Finalizado
-                            </div>
+                          @php
+                              $maior = 0;
+                              $menor = 0;
+                              $listaMaior = null;
+                              $listaMenor = null;
+                              foreach ($lote->itens->groupBy('LOTE_ITEM_STATUS') as $itensLote) {
+                                if ($maior < $itensLote->count()) {
+                                  $maior = $itensLote->count();
+                                  $listaMaior = $itensLote;
+                                }
+                                if ($menor == 0 || $itensLote->count() <= $menor) {
+                                  $menor = $itensLote->count();
+                                  $listaMenor = $itensLote;
+                                }
+                              }
+                          @endphp
+                          @if ($lote->itens->groupBy('LOTE_ITEM_STATUS')->count() == 1 && $listaMaior->first()->LOTE_ITEM_STATUS == $setores->sortByDesc('SETOR_ORDEM')->first()->SETOR_ORDEM)
+                              <div class="alert alert-success text-center" role="alert">
+                                  Finalizado
+                              </div>
                           @else
-                            <div class="alert alert-warning text-center" role="alert">
-                              Criado / Em Produção
-                            </div>
+                              <div class="alert alert-warning text-center" role="alert">
+                                  {{ $setores->sortBy('SETOR_ORDEM')->where("SETOR_ORDEM",$listaMenor->first()->LOTE_ITEM_STATUS)->first()->SETOR_NAME }}
+                              </div>
                           @endif
                         </td>
                         <td>{{ $lote->itens->count() }}</td>
@@ -74,7 +94,11 @@
                           <div class="dropdown-menu" aria-labelledby="acoes">
                               <a class="dropdown-item"
                                   href="{{ route('admin.lotes.itens',$lote->LOTE_TOKEN) }}">
-                                  Ver Itens
+                                  <div class="material-icons mr-3" style="width: 1.1rem;">list</div> Ver Itens
+                              </a>
+                              <a class="dropdown-item"
+                                  href="{{ route('admin.lotes.printer',$lote->LOTE_TOKEN) }}">
+                                  <div class="material-icons mr-3" style="width: 1.1rem;">printer</div> Imprimir
                               </a>
                               <div class="dropdown-divider"></div>
                               {{-- <a class="dropdown-item" href="#"
@@ -83,7 +107,7 @@
                               </a> --}}
                               <a class="dropdown-item" href="#"
                                   onclick="return false;">
-                                  Apagar
+                                  Apagar Lote
                               </a>
                           </div>
                         </td>

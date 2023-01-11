@@ -22,6 +22,7 @@ class CreateSetoresTable extends Migration
 			$table->string('SETOR_NAME')->nullable();
 			$table->uuid('SETOR_TOKEN')->nullable();
 			$table->integer('SETOR_STATUS')->nullable()->default(1); // 0 - Desativada | 1 - Ativa
+			$table->integer('SETOR_STATUS_EXCLUSIVE_MLX')->nullable()->default(0); // 0 - Desativada | 1 - Ativa
 
 
             $table->timestamps();

@@ -51,6 +51,7 @@ Route::group(['prefix'=>'admin','middleware' => 'auth', 'namespace' => 'Admin'],
 	// Gerenciador de Lote de Trabalho
 	Route::group(['prefix'=>'lotes'], function () {
 		Route::get('/','LotesController@index')->name('admin.lotes.index');
+		Route::get('{token}/printer','LotesController@index')->name('admin.lotes.printer');
 		Route::post('create','LotesController@create')->name('admin.lotes.create');
 		Route::group(['prefix'=>'{token}/itens'], function () {
 			Route::get('/','LotesController@itens')->name('admin.lotes.itens');

@@ -41,6 +41,7 @@ class SetoresController extends Controller
     {
         $array = $request->toArray();
         $array['SETOR_STATUS'] = (isset($array['SETOR_STATUS']))?1:0;
+        $array['SETOR_STATUS_EXCLUSIVE_MLX'] = (isset($array['SETOR_STATUS_EXCLUSIVE_MLX']))?1:0;
         $array['SETOR_TOKEN'] = Str::uuid();
         $ultimoSetor = $this->setoresRepository->orderBy('id','desc')->get()->first();
         if ($ultimoSetor == null) {

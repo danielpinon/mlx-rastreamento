@@ -25,6 +25,7 @@ class CreateLotesRastreamentosTable extends Migration
 			// Informações do Lote
 			$table->string('LOTE_DESC_SMALL')->nullable();
 			$table->uuid('LOTE_TOKEN'); //Token Único do Lote
+			$table->string('LOTE_IDENTIFY')->nullable(); // CÓDIGO DE BARRAS PARA LEITURA DE IDENTIFICAÇÃO
 			$table->integer('LOTE_STATUS')->default(0); // 0 - CRIADO | 1 - EM PRODUÇÃO | 2 - CONCLUÍDO
 			$table->integer('LOTE_QNT_ITENS');
 			$table->longText('LOTE_BIG_DESC')->nullable();

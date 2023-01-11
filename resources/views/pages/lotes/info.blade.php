@@ -53,10 +53,6 @@
                                 <div class="col-12 text-right">
                                     <a href="{{ route('admin.lotes.itens.add', $lote->LOTE_TOKEN) }}"
                                         class="btn btn-primary rounded-circle" style="color: white;padding: 1rem;">
-                                        <div class="material-icons" style="width: 1.1rem;">printer</div>
-                                    </a>
-                                    <a href="{{ route('admin.lotes.itens.add', $lote->LOTE_TOKEN) }}"
-                                        class="btn btn-primary rounded-circle" style="color: white;padding: 1rem;">
                                         <div class="material-icons">add</div>
                                     </a>
                                 </div>

@@ -51,18 +51,17 @@ class loteDeTrabalhoController extends BaseController
         return $this->sendResponse($array,'Get itens lote faccao.');
     }
 
-    public function updateItem(Request $request,$token)
+    public function updateItem(Request $request)
     {
         /**
          * Valida Dados
          */
-        if (!isset($request->LOTE_ITEM_IDENTIFY)) {
-            return $this->sendError('Error data LOTE_ITEM_IDENTIFY not send');
+        if (!isset($request->LOTE_IDENTIFY)) {
+            return $this->sendError('Error data LOTE_IDENTIFY not send');
         }
-        $lote = $this->lotesRastreamentoRepository->findToken($token);
-        $item = $lote->itens->where("LOTE_ITEM_IDENTIFY",$request->LOTE_ITEM_IDENTIFY)->first();
-        if ($item == null) {
-            return $this->sendError('Error data LOTE_ITEM_IDENTIFY not found');
+        $lote = $this->lotesRastreamentoRepository->findCode($request->LOTE_IDENTIFY);
+        if ($lote == null) {
+            return $this->sendError('Error data LOTE_IDENTIFY not found');
         }
         /**
          * Efetua a operação
@@ -71,7 +70,7 @@ class loteDeTrabalhoController extends BaseController
         $setorAtual = "false";
         $proximoSetor = "false";
         foreach ($setores->sortBy('SETOR_ORDEM')->makeHidden(['id','SETOR_STATUS','created_at','updated_at'])->toArray() as $key => $setor) {
-            if ($item->LOTE_ITEM_STATUS == $setor['SETOR_ORDEM']) {
+            if ($lote->itens->first()->LOTE_ITEM_STATUS == $setor['SETOR_ORDEM']) {
                 $setorAtual = $setor['SETOR_ORDEM'];
             }else {
                 if ($setorAtual != "false" && $proximoSetor == "false") {
@@ -79,19 +78,23 @@ class loteDeTrabalhoController extends BaseController
                 }
             }
         }
-        if ($proximoSetor == "false") {
-            $item->update([
-                "LOTE_ITEM_STATUS" => $setorAtual
-            ]);
-        }else{
-            $item->update([
-                "LOTE_ITEM_STATUS" => $proximoSetor
-            ]);
+        // dd($setorAtual, $proximoSetor);
+        foreach ($lote->itens as $item) {
+            if ($proximoSetor == "false") {
+                $item->update([
+                    "LOTE_ITEM_STATUS" => $setorAtual
+                ]);
+            }else{
+                $item->update([
+                    "LOTE_ITEM_STATUS" => $proximoSetor
+                ]);
+            }
         }
+        
         /**
          * Verifica se todos os itens estão atualizados
          */
-        $lote = $this->lotesRastreamentoRepository->findToken($token);
+        $lote = $this->lotesRastreamentoRepository->findCode($request->LOTE_IDENTIFY);
         $itens = $lote->itens;
         $itensCount = $itens->count();
         $itensComplete = 0;

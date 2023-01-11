@@ -39,4 +39,9 @@ class LotesRastreamentoRepositoryEloquent extends BaseRepository implements Lote
     {
         return LotesRastreamento::where('LOTE_TOKEN',$token)->first();
     }
+
+    public function findCode($identify)
+    {
+        return LotesRastreamento::where('LOTE_IDENTIFY',$identify)->first();
+    }
 }

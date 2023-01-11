@@ -23,7 +23,7 @@ Route::group(['namespace'=>'Api'],function () {
             Route::get('list', 'loteDeTrabalhoController@list');
             Route::get('{token}/info', 'loteDeTrabalhoController@info');
             Route::get('setores/list', 'loteDeTrabalhoController@setoresList');
-            Route::post('{token}/update', 'loteDeTrabalhoController@updateItem');
+            Route::post('update', 'loteDeTrabalhoController@updateItem');
         });
     });
 });

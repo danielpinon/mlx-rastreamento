@@ -17,7 +17,7 @@
             font-size: .6rem;
             font-weight: bold;
         }
-        tr{
+        tr,td{
             margin: 0px 0px 0px 0px !important;
             padding: 0px 0px 0px 0px !important;
         }

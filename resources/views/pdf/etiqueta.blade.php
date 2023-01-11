@@ -34,7 +34,7 @@
                 <td class="text" width="60%">Data de Geração: <br/>{{ date('d/m/Y H:i:s',strtotime($lote->created_at)) }}</td>
             </tr>
             <tr>
-                <td class="text" width="60%">Desc. Resumida: <br/>{{  $lote->LOTE_DESC_SMALL }}</td>
+                <td class="text" width="60%">Desc. Resumida: {{  $lote->LOTE_DESC_SMALL }}</td>
             </tr>
             <tr>
                 <td class="text" width="60%">Qnt de Itens: {{  $lote->LOTE_QNT_ITENS }}</td>

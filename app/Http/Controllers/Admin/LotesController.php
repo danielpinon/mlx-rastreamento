@@ -56,7 +56,7 @@ class LotesController extends Controller
         // dd();
         // return view('pdf.etiqueta', compact('lote', 'generator'));
         $pdf = Pdf::loadView('pdf.etiqueta', compact('lote', 'generator'));
-        $customPaper = array(0,0,255,113);
+        $customPaper = array(0,0,170,113);
         $pdf = $pdf->setPaper($customPaper);
         return $pdf->stream();
         return view('pages.lotes.info', compact('lote','setores'));

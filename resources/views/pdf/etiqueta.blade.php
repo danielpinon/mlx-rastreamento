@@ -10,11 +10,11 @@
             padding: 0px 0px 0px 0px !important;
         }
         .description{
-            font-size: .7rem;
+            font-size: .6rem;
             font-weight: bold;
         }
         .text{
-            font-size: .7rem;
+            font-size: .6rem;
             font-weight: bold;
         }
     </style>
@@ -36,10 +36,10 @@
                 <td class="text" width="50%">Qnt de Itens: {{  $lote->LOTE_QNT_ITENS }}</td>
             </tr>
             <tr>
-                <td class="description" colspan="2">Descrição: {{  $lote->LOTE_BIG_DESC }}</td>
+                <td class="text" width="50%">Código: {{  $lote->LOTE_IDENTIFY }}</td>
             </tr>
             <tr>
-                <td class="text" width="50%">Código: {{  $lote->LOTE_IDENTIFY }}</td>
+                <td class="description" width="50%">Descrição: {{  $lote->LOTE_BIG_DESC }}</td>
             </tr>
         </tbody>
     </table>

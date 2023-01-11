@@ -37,7 +37,7 @@ class loteDeTrabalhoController extends BaseController
 
     public function setoresList()
     {
-        $setores = $this->setoresRepository->findWhere(['SETOR_STATUS'=>true])->sortBy('SETOR_ORDEM')->makeHidden(['id','SETOR_STATUS','created_at','updated_at'])->toArray();
+        $setores = $this->setoresRepository->findWhere(['SETOR_STATUS'=>true,'SETOR_STATUS_EXCLUSIVE_MLX'=>0])->sortBy('SETOR_ORDEM')->makeHidden(['id','SETOR_STATUS','SETOR_STATUS_EXCLUSIVE_MLX','created_at','updated_at'])->toArray();
         return $this->sendResponse($setores,'Get list setores faccao.');
     }
 

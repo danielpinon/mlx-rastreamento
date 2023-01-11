@@ -73,13 +73,13 @@
                                 }
                               }
                           @endphp
-                          @if ($lote->itens->groupBy('LOTE_ITEM_STATUS')->count() == 1 && $listaMaior->first()->LOTE_ITEM_STATUS == $setores->sortByDesc('SETOR_ORDEM')->first()->SETOR_ORDEM)
+                          @if ($lote->itens->groupBy('LOTE_ITEM_STATUS')->count() == 1 && $listaMaior->first()->LOTE_ITEM_STATUS + 1 == $setores->sortByDesc('SETOR_ORDEM')->first()->SETOR_ORDEM)
                               <div class="alert alert-success text-center" role="alert">
-                                {{ $setores->sortBy('SETOR_ORDEM')->where("SETOR_ORDEM",$listaMenor->first()->LOTE_ITEM_STATUS)->first()->SETOR_NAME }}
+                                {{ $setores->sortBy('SETOR_ORDEM')->where("SETOR_ORDEM",$listaMenor->first()->LOTE_ITEM_STATUS + 1)->first()->SETOR_NAME }}
                               </div>
                           @else
                               <div class="alert alert-warning text-center" role="alert">
-                                  {{ $setores->sortBy('SETOR_ORDEM')->where("SETOR_ORDEM",$listaMenor->first()->LOTE_ITEM_STATUS)->first()->SETOR_NAME }}
+                                  {{ $setores->sortBy('SETOR_ORDEM')->where("SETOR_ORDEM",$listaMenor->first()->LOTE_ITEM_STATUS + 1)->first()->SETOR_NAME }}
                               </div>
                           @endif
                         </td>

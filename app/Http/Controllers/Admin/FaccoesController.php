@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\FaccoesRepository;
+use App\Repositories\FaccoesUsersRepository;
 
 class FaccoesController extends Controller
 {
@@ -15,11 +16,13 @@ class FaccoesController extends Controller
      * @return void
      */
     public function __construct(
-        FaccoesRepository $faccoesRepository
+        FaccoesRepository $faccoesRepository,
+        FaccoesUsersRepository $faccoesUsersRepository
     )
     {
         $this->middleware('auth');
         $this->faccoesRepository = $faccoesRepository;
+        $this->faccoesUsersRepository = $faccoesUsersRepository;
     }
 
     /**
@@ -54,6 +57,13 @@ class FaccoesController extends Controller
         $faccao = $this->faccoesRepository->findToken($token);
         if ($faccao == null) {
             return redirect()->back()->with('falha','Erro ao buscar facção!');
+        }
+        $users =  $this->faccoesUsersRepository->findWhere([
+            'FAC_ID' => $faccao->id
+        ]);
+        foreach ($users as $key => $relation) {
+            # code...
+            $relation->user->delete();
         }
         $faccao->delete();
         return redirect()->back()->with('sucesso','Facção apagada com sucesso!');

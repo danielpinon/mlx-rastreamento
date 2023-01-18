@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function index(User $model)
     {
-        return view('users.index', ['users' => $model->all()]);
+        return view('users.index', ['users' => $model->where('type',0)->get()]);
     }
 
     public function delete($id)
@@ -49,6 +49,7 @@ class UserController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
+            "subtype" => $request["subtype"]
         ]);
         return redirect()->back()->with('sucesso','Usuário cadastrado com sucesso!');
     }
@@ -59,7 +60,8 @@ class UserController extends Controller
             $user = User::find($request->id);
             $user->update([
                 "name" => $request["name"],
-                "email" => $request["email"]
+                "email" => $request["email"],
+                "subtype" => $request["subtype"]
             ]);
             $user->save();
             return redirect()->back()->with('sucesso','Usuário atualizado com sucesso!');
@@ -76,7 +78,8 @@ class UserController extends Controller
             $user->update([
                 "name" => $request["name"],
                 "email" => $request["email"],
-                "password" => Hash::make($request['password'])
+                "password" => Hash::make($request['password']),
+                "subtype" => $request["subtype"]
             ]);
             $user->save();
             return redirect()->back()->with('sucesso','Usuário atualizado com sucesso!');

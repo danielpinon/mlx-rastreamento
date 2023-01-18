@@ -20,6 +20,11 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('type')->default(0); // 0 - Admin | 1 - User Faccao
+            $table->integer('subtype')->default(0); 
+            /**
+             *  Admin:  0 - Admin | 1 - Ger. Lote | 2 - Ger. Setor/Faccao 
+             *  User Facção: 0 - Admin
+             */
             $table->rememberToken();
             $table->timestamps();
         });

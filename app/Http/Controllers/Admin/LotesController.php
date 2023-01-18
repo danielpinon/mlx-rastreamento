@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Picqer\Barcode\BarcodeGeneratorPNG;
+use chillerlan\QRCode\{QRCode, QROptions};
 use App\Http\Controllers\Controller;
 use App\Repositories\SetoresRepository;
 use App\Repositories\FaccoesRepository;
@@ -52,7 +52,7 @@ class LotesController extends Controller
     public function printer($token)
     {
         $lote = $this->lotesRastreamentoRepository->findToken($token);
-        $generator = new BarcodeGeneratorPNG();
+        $generator = new QRCode;
         // dd();
         // return view('pdf.etiqueta', compact('lote', 'generator'));
         $pdf = Pdf::loadView('pdf.etiqueta', compact('lote', 'generator'));

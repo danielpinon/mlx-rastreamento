@@ -7,6 +7,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "barryvdh/laravel-dompdf": "^2.0",
+        "chillerlan/php-qrcode": "^4.3",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel-frontend-presets/material-dashboard": "^1.1",
@@ -14,7 +15,6 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.0",
-        "picqer/php-barcode-generator": "^2.2",
         "prettus/l5-repository": "^2.8"
     },
     "require-dev": {

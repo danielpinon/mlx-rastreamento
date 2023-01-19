@@ -140,7 +140,7 @@
                                                         <div class="dropdown-menu" aria-labelledby="acoes">
                                                             <a class="dropdown-item"
                                                                 href="{{ route('admin.lotes.itens', $lote->LOTE_TOKEN) }}">
-                                                                Ver Itens
+                                                                <div class="material-icons mr-3" style="width: 1.1rem;">open_in_new</div> Ver Itens
                                                             </a>
                                                             @if (auth()->user()->subtype == 0 || auth()->user()->subtype == 2)
                                                               <a class="dropdown-item"

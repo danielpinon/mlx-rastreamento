@@ -82,7 +82,7 @@ class FaccoesController extends Controller
             return redirect()->back()->with('falha','Erro ao buscar facção!');
         }
         $setores = $this->setoresRepository->findWhere(['SETOR_STATUS'=>true]);
-        return view('pages.faccoes.info', compact('faccao'));
+        return view('pages.faccoes.info', compact('faccao','setores'));
         
     }
 

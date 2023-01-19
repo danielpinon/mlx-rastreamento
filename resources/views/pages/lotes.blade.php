@@ -96,13 +96,15 @@
                                   href="{{ route('admin.lotes.itens',$lote->LOTE_TOKEN) }}">
                                   <div class="material-icons mr-3" style="width: 1.1rem;">list</div> Ver Itens
                               </a>
-                              <a class="dropdown-item"
-                                  href="#"
-                                  data-toggle="modal" data-target="#changeLotesDeTrabalho"
-                                  data-status="{{ $listaMenor->first()->LOTE_ITEM_STATUS + 1 }}"
-                                  data-href="{{ route('admin.lotes.changestatus',$lote->LOTE_TOKEN) }}">
-                                  <div class="material-icons mr-3" style="width: 1.1rem;">change_circle</div> Alterar Status
-                              </a>
+                              @if (auth()->user()->subtype == 0 || auth()->user()->subtype == 2)
+                                <a class="dropdown-item"
+                                    href="#"
+                                    data-toggle="modal" data-target="#changeLotesDeTrabalho"
+                                    data-status="{{ $listaMenor->first()->LOTE_ITEM_STATUS + 1 }}"
+                                    data-href="{{ route('admin.lotes.changestatus',$lote->LOTE_TOKEN) }}">
+                                    <div class="material-icons mr-3" style="width: 1.1rem;">change_circle</div> Alterar Status
+                                </a>
+                              @endif
                               <a class="dropdown-item"
                                   href="{{ route('admin.lotes.printer',$lote->LOTE_TOKEN) }}">
                                   <div class="material-icons mr-3" style="width: 1.1rem;">printer</div> Imprimir

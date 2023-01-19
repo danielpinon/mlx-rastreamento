@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\SetoresRepository;
 use App\Repositories\FaccoesRepository;
 use App\Repositories\FaccoesUsersRepository;
 
@@ -17,10 +18,12 @@ class FaccoesController extends Controller
      */
     public function __construct(
         FaccoesRepository $faccoesRepository,
+        SetoresRepository $setoresRepository,
         FaccoesUsersRepository $faccoesUsersRepository
     )
     {
         $this->middleware('auth');
+        $this->setoresRepository = $setoresRepository;
         $this->faccoesRepository = $faccoesRepository;
         $this->faccoesUsersRepository = $faccoesUsersRepository;
     }
@@ -78,6 +81,7 @@ class FaccoesController extends Controller
         if ($faccao == null) {
             return redirect()->back()->with('falha','Erro ao buscar facção!');
         }
+        $setores = $this->setoresRepository->findWhere(['SETOR_STATUS'=>true]);
         return view('pages.faccoes.info', compact('faccao'));
         
     }

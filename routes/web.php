@@ -55,6 +55,7 @@ Route::group(['prefix'=>'admin','middleware' => 'auth', 'namespace' => 'Admin'],
 		Route::get('{token}/apagar','LotesController@delete')->name('admin.lotes.apagar');
 		Route::get('{token}/printer','LotesController@printer')->name('admin.lotes.printer');
 		Route::post('create','LotesController@create')->name('admin.lotes.create');
+		Route::post('{token}/changestatus','LotesController@changestatus')->name('admin.lotes.changestatus');
 		Route::group(['prefix'=>'{token}/itens'], function () {
 			Route::get('/','LotesController@itens')->name('admin.lotes.itens');
 			Route::get('add','LotesController@addItem')->name('admin.lotes.itens.add');

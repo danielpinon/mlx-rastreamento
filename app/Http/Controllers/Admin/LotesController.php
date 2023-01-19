@@ -128,4 +128,18 @@ class LotesController extends Controller
         ]);
         return redirect()->back()->with('sucesso','Item apagado no Lote com Sucesso!');
     }
+
+    public function changestatus(Request $request, $token)
+    {
+        $lote = $this->lotesRastreamentoRepository->findToken($token);
+        $lote->update([
+            "LOTE_STATUS" => $request->SETOR_FACCAO - 1
+        ]);
+        foreach ($lote->itens as $iten) {
+            $iten->update([
+                "LOTE_ITEM_STATUS" => $request->SETOR_FACCAO - 1
+            ]);
+        }
+        return redirect()->back()->with('sucesso','Lote atualizado com Sucesso!');
+    }
 }

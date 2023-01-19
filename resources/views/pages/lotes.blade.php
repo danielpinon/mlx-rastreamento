@@ -97,14 +97,17 @@
                                   <div class="material-icons mr-3" style="width: 1.1rem;">list</div> Ver Itens
                               </a>
                               <a class="dropdown-item"
+                                  href="#"
+                                  data-toggle="modal" data-target="#changeLotesDeTrabalho"
+                                  data-status="{{ $listaMenor->first()->LOTE_ITEM_STATUS + 1 }}"
+                                  data-href="{{ route('admin.lotes.changestatus',$lote->LOTE_TOKEN) }}">
+                                  <div class="material-icons mr-3" style="width: 1.1rem;">change_circle</div> Alterar Status
+                              </a>
+                              <a class="dropdown-item"
                                   href="{{ route('admin.lotes.printer',$lote->LOTE_TOKEN) }}">
                                   <div class="material-icons mr-3" style="width: 1.1rem;">printer</div> Imprimir
                               </a>
                               <div class="dropdown-divider"></div>
-                              {{-- <a class="dropdown-item" href="#"
-                                  onclick="return false;">
-                                  Bloquear
-                              </a> --}}
                               <a class="dropdown-item btn-apagar" href="#"
                                   data-token="{{ $lote->LOTE_TOKEN }}"
                                   onclick="return false;">
@@ -176,9 +179,54 @@
     </div>
   </div>
 </div>
+<!-- Modal Alterar Status -->
+<div class="modal fade" id="changeLotesDeTrabalho" tabindex="-1" role="dialog" aria-labelledby="changeLotesDeTrabalhoLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="changeLotesDeTrabalhoLabel">Alterar Status do Lote</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="#" method="post">
+        @csrf
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <label>Selecione o Status</label>
+                <select class="form-control" data-style="btn btn-link" name="SETOR_FACCAO" required>
+                  @foreach ($setores->sortBy('SETOR_ORDEM') as $setor)
+                      <option value="{{$setor->SETOR_ORDEM}}">{{$setor->SETOR_NAME}}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <button type="submit" class="btn btn-primary">Alterar Status</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 @endsection
 
 @push('js')
+    <script>
+      $('#changeLotesDeTrabalho').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('form').attr('action',button.data('href'))
+        modal.find('.modal-body select').val(button.data('status')).trigger('change')
+      })
+    </script>
     <script>
       // Apagar Documento
       (() => {

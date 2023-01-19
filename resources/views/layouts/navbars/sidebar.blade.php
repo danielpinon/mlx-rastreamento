@@ -55,14 +55,12 @@
           </a>
         </li>
       @endif
-      @if (auth()->user()->subtype == 0 || auth()->user()->subtype == 1)
-        <li class="nav-item{{ $activePage == 'lotes' ? ' active' : '' }}">
-          <a class="nav-link" href="{{ route('admin.lotes.index') }}">
-            <i class="material-icons">work_history</i>
-            <p>{{ __('Ger. de Lote de Trabalho') }}</p>
-          </a>
-        </li>
-      @endif
+      <li class="nav-item{{ $activePage == 'lotes' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.lotes.index') }}">
+          <i class="material-icons">work_history</i>
+          <p>{{ __('Ger. de Lote de Trabalho') }}</p>
+        </a>
+      </li>
     </ul>
   </div>
 </div>

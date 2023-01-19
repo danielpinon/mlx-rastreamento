@@ -103,13 +103,29 @@
                                                     <td>{{ $lote->id }}</td>
                                                     <td>{{ $lote->LOTE_DESC_SMALL }}</td>
                                                     <td>
-                                                        @if ($lote->LOTE_STATUS)
+                                                        @php
+                                                            $maior = 0;
+                                                            $menor = 0;
+                                                            $listaMaior = null;
+                                                            $listaMenor = null;
+                                                            foreach ($lote->itens->groupBy('LOTE_ITEM_STATUS') as $itensLote) {
+                                                                if ($maior < $itensLote->count()) {
+                                                                $maior = $itensLote->count();
+                                                                $listaMaior = $itensLote;
+                                                                }
+                                                                if ($menor == 0 || $itensLote->count() <= $menor) {
+                                                                $menor = $itensLote->count();
+                                                                $listaMenor = $itensLote;
+                                                                }
+                                                            }
+                                                        @endphp
+                                                        @if ($lote->itens->groupBy('LOTE_ITEM_STATUS')->count() == 1 && $listaMaior->first()->LOTE_ITEM_STATUS + 1 == $setores->sortByDesc('SETOR_ORDEM')->first()->SETOR_ORDEM)
                                                             <div class="alert alert-success text-center" role="alert">
-                                                                Finalizado
+                                                                {{ $setores->sortBy('SETOR_ORDEM')->where("SETOR_ORDEM",$listaMenor->first()->LOTE_ITEM_STATUS + 1)->first()->SETOR_NAME }}
                                                             </div>
                                                         @else
                                                             <div class="alert alert-warning text-center" role="alert">
-                                                                Criado / Em Produção
+                                                                {{ $setores->sortBy('SETOR_ORDEM')->where("SETOR_ORDEM",$listaMenor->first()->LOTE_ITEM_STATUS + 1)->first()->SETOR_NAME }}
                                                             </div>
                                                         @endif
                                                     </td>

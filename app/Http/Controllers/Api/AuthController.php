@@ -24,9 +24,6 @@ class AuthController extends BaseController
     {
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 
             $authUser = Auth::user();
-            if ($authUser->type != 1) {
-                return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
-            }
             $success['token'] =  $authUser->createToken('mlx')->plainTextToken; 
             $success['name'] =  $authUser->name;
    

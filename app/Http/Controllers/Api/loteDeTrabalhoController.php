@@ -30,8 +30,12 @@ class loteDeTrabalhoController extends BaseController
     public function list()
     {
         $user = auth()->user();
-        $faccoes = $this->faccoesUsersRepository->findUser($user->id);
-        $lotes = $faccoes->lotes->makeHidden(['id','FAC_ID','created_at','updated_at'])->toArray();
+        if ($user->type != 0) {
+            $faccoes = $this->faccoesUsersRepository->findUser($user->id);
+            $lotes = $faccoes->lotes->makeHidden(['id','FAC_ID','created_at','updated_at'])->toArray();
+        }else{
+            $lotes = $this->lotesRastreamentoRepository->all()->makeHidden(['id','FAC_ID','created_at','updated_at'])->toArray();
+        }
         return $this->sendResponse($lotes,'Get list lotes Faccao.');
     }
 
@@ -68,48 +72,42 @@ class loteDeTrabalhoController extends BaseController
          */
         $setores = $this->setoresRepository->findWhere(['SETOR_STATUS'=>true]);
         $setorAtual = "false";
+        $setorAtualExclusive = false;
         $proximoSetor = "false";
         foreach ($setores->sortBy('SETOR_ORDEM')->makeHidden(['id','SETOR_STATUS','created_at','updated_at'])->toArray() as $key => $setor) {
-            if ($lote->itens->first()->LOTE_ITEM_STATUS == $setor['SETOR_ORDEM']) {
-                $setorAtual = $setor['SETOR_ORDEM'];
+            if (($lote->itens->first()->LOTE_ITEM_STATUS + 1) == $setor['SETOR_ORDEM']) {
+                $setorAtual = $setor['SETOR_ORDEM'] - 1;
+                $setorAtualExclusive = ($setor['SETOR_STATUS_EXCLUSIVE_MLX'])?1:0;
             }else {
                 if ($setorAtual != "false" && $proximoSetor == "false") {
-                    $proximoSetor = $setor['SETOR_ORDEM'];
+                    $proximoSetor = $setor['SETOR_ORDEM'] - 1;
                 }
             }
         }
-        // dd($setorAtual, $proximoSetor);
-        foreach ($lote->itens as $item) {
+        // Valida se é exclusiva (Se for difente está correto)
+        if ($setorAtualExclusive != auth()->user()->type) {
+            foreach ($lote->itens as $item) {
+                if ($proximoSetor == "false") {
+                    $item->update([
+                        "LOTE_ITEM_STATUS" => $setorAtual
+                    ]);
+                }else{
+                    $item->update([
+                        "LOTE_ITEM_STATUS" => $proximoSetor
+                    ]);
+                }
+            }
             if ($proximoSetor == "false") {
-                $item->update([
-                    "LOTE_ITEM_STATUS" => $setorAtual
+                $lote->update([
+                    "LOTE_STATUS" => $setorAtual
                 ]);
             }else{
-                $item->update([
-                    "LOTE_ITEM_STATUS" => $proximoSetor
+                $lote->update([
+                    "LOTE_STATUS" => $proximoSetor
                 ]);
             }
+            
         }
-        
-        /**
-         * Verifica se todos os itens estão atualizados
-         */
-        $lote = $this->lotesRastreamentoRepository->findCode($request->LOTE_IDENTIFY);
-        $itens = $lote->itens;
-        $itensCount = $itens->count();
-        $itensComplete = 0;
-        foreach ($itens as $key => $item) {
-            if ($item->LOTE_ITEM_STATUS == $setores->sortByDesc('SETOR_ORDEM')->first()->SETOR_ORDEM) {
-                $itensComplete++;
-            }
-        }
-        // Então todos os itens estão completos
-        if ($itensCount ==$itensComplete) {
-            $lote->update([
-                "LOTE_STATUS" => true
-            ]);
-        }
-        
         return $this->sendResponse(["success"=>true],'Updated item.');
     }
 

@@ -41,6 +41,7 @@ class loteDeTrabalhoController extends BaseController
 
     public function setoresList()
     {
+        $user = auth()->user();
         if ($user->type != 0) {
             $setores = $this->setoresRepository->findWhere(['SETOR_STATUS'=>true,'SETOR_STATUS_EXCLUSIVE_MLX'=>0])->sortBy('SETOR_ORDEM')->makeHidden(['id','SETOR_STATUS','SETOR_STATUS_EXCLUSIVE_MLX','created_at','updated_at'])->toArray();
         }else{

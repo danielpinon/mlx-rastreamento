@@ -74,7 +74,7 @@
                                                 <td>Sem Itens</td>
                                             </tr>
                                         @else
-                                            @foreach ($lote->itens as $item)
+                                            @foreach ($lote->itens->sortByDesc('id') as $item)
                                                 <tr>
                                                     <td>{{ $item->id }}</td>
                                                     <td>{{ $item->LOTE_ITEM_IDENTIFY }}</td>

@@ -45,7 +45,7 @@
                       <td>Sem Fações</td>
                     </tr>
                   @else
-                    @foreach ($faccoes as $faccao)
+                    @foreach ($faccoes->sortByDesc('id') as $faccao)
                       <tr>
                         <td>{{ $faccao->id }}</td>
                         <td>{{ $faccao->FAC_NAME }}</td>

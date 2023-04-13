@@ -55,7 +55,7 @@
                       <td>Sem Lotes</td>
                     </tr>
                   @else
-                    @foreach ($lotes as $lote)
+                    @foreach ($lotes->sortByDesc('id') as $lote)
                       <tr>
                         <td>{{ $lote->id }}</td>
                         <td>{{ $lote->faccao->FAC_NAME }}</td>

@@ -98,7 +98,7 @@
                                                 <td>Sem Lotes</td>
                                             </tr>
                                         @else
-                                            @foreach ($faccao->lotes as $lote)
+                                            @foreach ($faccao->lotes->sortByDesc('id') as $lote)
                                                 <tr>
                                                     <td>{{ $lote->id }}</td>
                                                     <td>{{ $lote->LOTE_DESC_SMALL }}</td>

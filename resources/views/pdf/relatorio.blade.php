@@ -37,7 +37,7 @@
             padding-top: 2rem;
             padding-bottom: 2rem;
             width: 21cm;
-            height: 29.7cm; 
+            /*height: 29.7cm;*/
             page-break-after: always; 
             page-break-inside: avoid;
         }

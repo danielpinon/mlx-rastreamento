@@ -35,13 +35,17 @@
                   <th>Facção</th>
                   <th>Descrição</th>
                   <th>Status</th>
-                  <th>Concluídos</th>
-                  <th>Pendentes</th>
+                  <th>Conc</th>
+                  <th>Pend.</th>
+                  <th>Dt Init.</th>
+                  <th>Dt Comp.</th>
                   <th>Opções</th>
                 </thead>
                 <tbody>
                   @if ($lotes == "[]")
                     <tr>
+                      <td>Sem Lotes</td>
+                      <td>Sem Lotes</td>
                       <td>Sem Lotes</td>
                       <td>Sem Lotes</td>
                       <td>Sem Lotes</td>
@@ -85,6 +89,8 @@
                         </td>
                         <td>{{ $lote->itens->count() }}</td>
                         <td>{{ $lote->itens->count() }}</td>
+                        <td>{{ date('d/m/Y H:i',strtotime($lote->created_at)) }}</td>
+                        <td>{{ date('d/m/Y H:i',strtotime($lote->updated_at)) }}</td>
                         <td>
                           <button class="btn btn-primary dropdown-toggle p-2" type="button"
                               id="acoes" data-toggle="dropdown" aria-haspopup="true"

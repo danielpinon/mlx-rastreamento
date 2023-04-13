@@ -54,6 +54,13 @@
               <p>{{ __('Ger. de Setores') }}</p>
           </a>
         </li>
+        {{-- Relatórios do Sistema --}}
+        <li class="nav-item{{ $activePage == 'relatorios' ? ' active' : '' }}">
+          <a class="nav-link" href="{{ route('admin.relatorios.index') }}">
+            <i class="material-icons">description</i>
+            <p>{{ __('Ger. de Relatórios') }}</p>
+          </a>
+        </li>
       @endif
       <li class="nav-item{{ $activePage == 'lotes' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('admin.lotes.index') }}">

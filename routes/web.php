@@ -24,6 +24,7 @@ Route::get('/', function () {
 Route::group(['prefix'=>'admin','middleware' => 'auth', 'namespace' => 'Admin'], function () {
 	// Página Inicial
 	Route::get('/home', 'HomeController@index')->name('home');
+	Route::get('/msg/{id}', 'HomeController@markRead')->name('home.msg.read');
 	
 	// Gerenciador de Facções
 	Route::group(['prefix'=>'faccoes'], function () {

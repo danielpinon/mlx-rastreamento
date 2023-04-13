@@ -25,5 +25,6 @@ Route::group(['namespace'=>'Api'],function () {
             Route::get('setores/list', 'loteDeTrabalhoController@setoresList');
             Route::post('update', 'loteDeTrabalhoController@updateItem');
         });
+        Route::post('msg', 'AuthController@sendMsg');
     });
 });

@@ -8,10 +8,10 @@
           <div class="card card-stats">
             <div class="card-header card-header-primary card-header-icon">
               <div class="card-icon">
-                <i class="material-icons">notifications_active</i>
+                <i class="material-icons">reviews</i>
               </div>
-              <p class="card-category">Nº de Alertas</p>
-              <h3 class="card-title">0</h3>
+              <p class="card-category">Msgs Pendentes</p>
+              <h3 class="card-title">{{ $msgs->count() }}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
@@ -73,24 +73,35 @@
         <div class="col-lg-12 col-md-12">
           <div class="card">
             <div class="card-header card-header-primary">
-              <h4 class="card-title">Alertas</h4>
-              <p class="card-category">Alertas Pendentes de Solução.</p>
+              <h4 class="card-title">Mensagens da Facção</h4>
+              <p class="card-category">Mensagens recebidas.</p>
             </div>
             <div class="card-body table-responsive">
               <table class="table table-hover">
                 <thead class="">
-                  <th>Origem</th>
+                  <th>Facção</th>
                   <th>Conteúdo</th>
-                  <th>Status</th>
                   <th class="text-right">Ações</th>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Sem Alertas</td>
-                    <td>Sem Alertas</td>
-                    <td>Sem Alertas</td>
-                    <td class="text-right">Sem Alertas</td>
-                  </tr>
+                  @if ($msgs == "[]")
+                    <tr>
+                      <td>Sem Mensagens</td>
+                      <td>Sem Mensagens</td>
+                      <td class="text-right">Sem Mensagens</td>
+                    </tr>
+                  @else
+                      @foreach ($msgs as $msg)
+                        <tr>
+                          <td>{{$msg->faccoes->FAC_NAME}}</td>
+                          <td>{{$msg->FAC_MSG_APP}}</td>
+                          <td class="text-right">
+                            <a href="{{route('home.msg.read',$msg->id)}}" class="btn btn-primary"> <i class="material-icons">done</i> Marcar como lido</a>
+                          </td>
+                        </tr>                          
+                      @endforeach
+                  @endif
+                  
                   {{-- <tr>
                     <td class="">Teste</td>
                     <td class="">Teste</td>

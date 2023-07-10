@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'lotes', 'titlePage' => __('Gerenciador de Lotes de Trabalho')])
+@extends('layouts.app', ['activePage' => 'lotes-concluidos', 'titlePage' => __('Gerenciador de Lotes de Trabalho')])
 
 @push('css')
     <style>
@@ -15,8 +15,8 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title ">Lotes Pendentes de Trabalho do Sistema</h4>
-            <p class="card-category">Lista de Lotes Pendentes de Trabalho do Sistema</p>
+            <h4 class="card-title ">Lotes Concluídos de Trabalho do Sistema</h4>
+            <p class="card-category">Lista de Lotes Concluídos de Trabalho do Sistema</p>
           </div>
           <div class="card-body">
             <div class="row">

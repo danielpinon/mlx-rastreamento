@@ -25,7 +25,7 @@ Route::group(['prefix'=>'admin','middleware' => 'auth', 'namespace' => 'Admin'],
 	// Página Inicial
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::get('/msg/{id}', 'HomeController@markRead')->name('home.msg.read');
-	
+
 	// Gerenciador de Facções
 	Route::group(['prefix'=>'faccoes'], function () {
 		Route::get('/','FaccoesController@index')->name('admin.faccoes.index');
@@ -41,7 +41,7 @@ Route::group(['prefix'=>'admin','middleware' => 'auth', 'namespace' => 'Admin'],
 				Route::get('{tokenUser}/delete', 'UsersController@delete')->name('admin.faccoes.details.users.delete');
 				Route::post('{tokenUser}/update', 'UsersController@update')->name('admin.faccoes.details.users.update');
 			});
-		});		
+		});
 	});
 	// Gerenciador de Setores
 	Route::group(['prefix'=>'setores'], function () {
@@ -53,6 +53,7 @@ Route::group(['prefix'=>'admin','middleware' => 'auth', 'namespace' => 'Admin'],
 	// Gerenciador de Lote de Trabalho
 	Route::group(['prefix'=>'lotes'], function () {
 		Route::get('/','LotesController@index')->name('admin.lotes.index');
+		Route::get('concluidos','LotesController@completed')->name('admin.lotes.concluidos');
 		Route::get('{token}/apagar','LotesController@delete')->name('admin.lotes.apagar');
 		Route::get('{token}/printer','LotesController@printer')->name('admin.lotes.printer');
 		Route::post('create','LotesController@create')->name('admin.lotes.create');

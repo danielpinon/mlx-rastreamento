@@ -34,16 +34,30 @@ class LotesController extends Controller
     }
 
     /**
-     * Show the application faccoes.
+     * Show the application faccoes - Incomplete.
      *
      * @return \Illuminate\View\View
      */
     public function index()
     {
         $faccoes = $this->faccoesRepository->findWhere(["FAC_STATUS"=>1]);
-        $lotes = $this->lotesRastreamentoRepository->all();
         $setores = $this->setoresRepository->findWhere(['SETOR_STATUS'=>true]);
+        $lotes = $this->lotesRastreamentoRepository->findWhereNotIn('LOTE_STATUS',[($setores->sortByDesc('SETOR_ORDEM')->first()->SETOR_ORDEM - 1)]);
+        //dd(($setores->sortByDesc('SETOR_ORDEM')->first()->SETOR_ORDEM - 1),$lotes->first());
         return view('pages.lotes', compact('lotes','faccoes','setores'));
+    }
+
+    /**
+     * Show the application faccoes - Complete.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function completed()
+    {
+        $faccoes = $this->faccoesRepository->findWhere(["FAC_STATUS"=>1]);
+        $setores = $this->setoresRepository->findWhere(['SETOR_STATUS'=>true]);
+        $lotes = $this->lotesRastreamentoRepository->findWhere(['LOTE_STATUS' => ($setores->sortByDesc('SETOR_ORDEM')->first()->SETOR_ORDEM - 1)]);
+        return view('pages.lotes.concluidos', compact('lotes','faccoes','setores'));
     }
 
     /**
@@ -65,7 +79,7 @@ class LotesController extends Controller
 
     /**
      * Create the application lote
-     * 
+     *
      */
     public function create(Request $request)
     {
@@ -75,7 +89,7 @@ class LotesController extends Controller
         $lote->update([
             'LOTE_IDENTIFY' => "L".str_pad($lote->id, 10 , '0' , STR_PAD_LEFT)."D".date('Ymd')."I".str_pad(0, 4 , '0' , STR_PAD_LEFT)
         ]);
-        for ($i=1; $i <= $request->LOTE_QNT_ITENS; $i++) { 
+        for ($i=1; $i <= $request->LOTE_QNT_ITENS; $i++) {
             $this->lotesRastreamentoItemRepository->create([
                 'LOTE_ID' => $lote->id,
                 'LOTE_ITEM_IDENTIFY' => "L".str_pad($lote->id, 10 , '0' , STR_PAD_LEFT)."D".date('Ymd')."I".str_pad($i, 4 , '0' , STR_PAD_LEFT)

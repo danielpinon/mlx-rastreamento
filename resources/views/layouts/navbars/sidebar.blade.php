@@ -16,13 +16,13 @@
       @if (auth()->user()->subtype == 0)
         {{-- Usuários do Sistema --}}
         <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
-          <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="false">
+          <a class="nav-link" data-toggle="collapse" href="#users" aria-expanded="false">
             <i class="material-icons">people</i>
             <p>{{ __('Usuários') }}
               <b class="caret"></b>
             </p>
           </a>
-          <div class="collapse" id="laravelExample">
+          <div class="collapse" id="users">
             <ul class="nav">
               <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('profile.edit') }}">
@@ -62,11 +62,36 @@
           </a>
         </li>
       @endif
-      <li class="nav-item{{ $activePage == 'lotes' ? ' active' : '' }}">
+      {{-- <li class="nav-item{{ $activePage == 'lotes' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('admin.lotes.index') }}">
           <i class="material-icons">work_history</i>
           <p>{{ __('Ger. de Lote de Trabalho') }}</p>
         </a>
+      </li> --}}
+      {{-- Usuários do Sistema --}}
+      <li class="nav-item {{ ($activePage == 'lotes' || $activePage == 'lotes-concluidos') ? ' active' : '' }}">
+        <a class="nav-link" data-toggle="collapse" href="#lotesDeTrabalho" aria-expanded="false">
+          <i class="material-icons">work_history</i>
+          <p>{{ __('Ger. de Lote de Trabalho') }}
+            <b class="caret"></b>
+          </p>
+        </a>
+        <div class="collapse" id="lotesDeTrabalho">
+          <ul class="nav">
+            <li class="nav-item{{ $activePage == 'lotes' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('admin.lotes.index') }}">
+                <i class="material-icons">work_history</i>
+                <span class="sidebar-normal">{{ __('Pendentes') }} </span>
+              </a>
+            </li>
+            <li class="nav-item{{ $activePage == 'lotes-concluidos' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('admin.lotes.concluidos') }}">
+                <i class="material-icons">work_history</i>
+                <span class="sidebar-normal"> {{ __('Concluídos') }} </span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </li>
     </ul>
   </div>

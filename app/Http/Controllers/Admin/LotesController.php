@@ -43,7 +43,6 @@ class LotesController extends Controller
         $faccoes = $this->faccoesRepository->findWhere(["FAC_STATUS"=>1]);
         $setores = $this->setoresRepository->findWhere(['SETOR_STATUS'=>true]);
         $lotes = $this->lotesRastreamentoRepository->findWhereNotIn('LOTE_STATUS',[($setores->sortByDesc('SETOR_ORDEM')->first()->SETOR_ORDEM - 1)]);
-        //dd(($setores->sortByDesc('SETOR_ORDEM')->first()->SETOR_ORDEM - 1),$lotes->first());
         return view('pages.lotes', compact('lotes','faccoes','setores'));
     }
 
